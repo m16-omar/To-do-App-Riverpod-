@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:riverpod_to_do_app/utils/utils.dart';
 import 'package:gap/gap.dart';
+import 'package:riverpod_to_do_app/widgets/common_container.dart';
 import 'package:riverpod_to_do_app/widgets/display_white_text.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,18 +45,13 @@ class HomeScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
+              physics: AlwaysScrollableScrollPhysics(),
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                    width: deviceSize.width,
+                  CommonContainer(
                     height: deviceSize.height * 0.3,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: colors.primaryContainer,
-                    ),
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: 8,
@@ -71,13 +67,8 @@ class HomeScreen extends StatelessWidget {
                     style: context.textTheme.headlineMedium,
                   ),
                   Gap(20),
-                  Container(
-                    width: deviceSize.width,
+                  CommonContainer(
                     height: deviceSize.height * 0.25,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: colors.primaryContainer,
-                    ),
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: 8,
@@ -91,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: DisplayWhiteText(text: 'Add New Task'),
                     ),
                   )
