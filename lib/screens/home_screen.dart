@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+import 'package:riverpod_to_do_app/data/data.dart';
 import 'package:riverpod_to_do_app/utils/utils.dart';
 import 'package:gap/gap.dart';
-import 'package:riverpod_to_do_app/widgets/common_container.dart';
 import 'package:riverpod_to_do_app/widgets/display_white_text.dart';
+import 'package:riverpod_to_do_app/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -41,52 +41,73 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: 170,
+            top: 130,
             left: 0,
             right: 0,
-            child: SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  CommonContainer(
-                    height: deviceSize.height * 0.3,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 8,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (ctx, index) {
-                        return Text('Home');
-                      },
+            child: SafeArea(
+              child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    DisplayListOfTasks(
+                      tasks: [
+                        Task(
+                          title: 'title 1',
+                          note: 'note',
+                          time: '12:30',
+                          date: 'May,09',
+                          category: TaskCategories.home,
+                          isCompleted: false,
+                        ),
+                        Task(
+                          title: 'title 2, title 2, title 2,title 2',
+                          note: 'note',
+                          time: '12:30',
+                          date: 'May,09',
+                          category: TaskCategories.shopping,
+                          isCompleted: false,
+                        ),
+                      ],
                     ),
-                  ),
-                  Gap(20),
-                  Text(
-                    'Completed',
-                    style: context.textTheme.headlineMedium,
-                  ),
-                  Gap(20),
-                  CommonContainer(
-                    height: deviceSize.height * 0.25,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 8,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (ctx, index) {
-                        return Text('Home');
-                      },
+                    Gap(20),
+                    Text(
+                      'Completed',
+                      style: context.textTheme.headlineMedium,
                     ),
-                  ),
-                  Gap(20),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: DisplayWhiteText(text: 'Add New Task'),
+                    Gap(20),
+                    DisplayListOfTasks(
+                      tasks: [
+                        Task(
+                          title: 'title 1',
+                          note: 'note',
+                          time: '12:30',
+                          date: 'May,09',
+                          category: TaskCategories.home,
+                          isCompleted: false,
+                        ),
+                        Task(
+                          title: 'title 2, title 2, title 2,title 2',
+                          note: 'note',
+                          time: '12:30',
+                          date: 'May,09',
+                          category: TaskCategories.shopping,
+                          isCompleted: false,
+                        ),
+                      ],
+                      isCompletedTasks: true,
                     ),
-                  )
-                ],
+                    Gap(20),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: DisplayWhiteText(text: 'Add New Task'),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
