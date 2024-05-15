@@ -55,14 +55,14 @@ class HomeScreen extends StatelessWidget {
                       tasks: [
                         Task(
                           title: 'title 1',
-                          note: 'note',
+                          note: '',
                           time: '12:30',
                           date: 'May,09',
                           category: TaskCategories.home,
                           isCompleted: false,
                         ),
                         Task(
-                          title: 'title 2, title 2, title 2,title 2',
+                          title: 'title 2,',
                           note: 'note',
                           time: '12:30',
                           date: 'May,09',
@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                           isCompleted: true,
                         ),
                         Task(
-                          title: 'title 2, title 2, title 2,title 2',
+                          title: 'title 2,',
                           note: 'note',
                           time: '12:30',
                           date: 'May,09',

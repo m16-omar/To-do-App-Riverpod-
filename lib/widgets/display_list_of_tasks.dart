@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:riverpod_to_do_app/data/data.dart';
 import 'package:riverpod_to_do_app/utils/utils.dart';
 import 'package:riverpod_to_do_app/widgets/common_container.dart';
+import 'package:riverpod_to_do_app/widgets/task_details.dart';
 import 'package:riverpod_to_do_app/widgets/task_tile.dart';
 
 class DisplayListOfTasks extends StatelessWidget {
@@ -39,7 +40,20 @@ class DisplayListOfTasks extends StatelessWidget {
               padding: EdgeInsets.zero,
               itemBuilder: (ctx, index) {
                 final task = tasks[index];
-                return TaskTile(task: task);
+                return InkWell(
+                  onLongPress: () {
+                    // To-do Delete Task
+                  },
+                  onTap: () async {
+                    // To-do show task details
+                    await showModalBottomSheet(
+                        context: context,
+                        builder: (ctx) {
+                          return TaskDetails(task: task);
+                        });
+                  },
+                  child: TaskTile(task: task),
+                );
               },
               separatorBuilder: (BuildContext context, int index) {
                 return Divider(

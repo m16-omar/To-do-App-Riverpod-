@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:riverpod_to_do_app/data/models/task.dart';
 import 'package:riverpod_to_do_app/utils/utils.dart';
+import 'package:riverpod_to_do_app/widgets/circle_container.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({super.key, required this.task, this.onCompleted});
@@ -26,16 +27,8 @@ class TaskTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            padding: EdgeInsets.all(9.0),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: task.category.color.withOpacity(backgroundOpacity),
-              border: Border.all(
-                width: 2,
-                color: task.category.color.withOpacity(iconOpacity),
-              ),
-            ),
+          CircleContainer(
+            color: task.category.color.withOpacity(backgroundOpacity),
             child: Center(
               child: Icon(
                 task.category.icon,
