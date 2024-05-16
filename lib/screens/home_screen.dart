@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:riverpod_to_do_app/config/routes/routes.dart';
 import 'package:riverpod_to_do_app/data/data.dart';
 import 'package:riverpod_to_do_app/utils/utils.dart';
 import 'package:gap/gap.dart';
@@ -8,6 +10,8 @@ import 'package:riverpod_to_do_app/widgets/display_white_text.dart';
 import 'package:riverpod_to_do_app/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
+  static HomeScreen builder(BuildContext context, GoRouterState state) =>
+      const HomeScreen();
   const HomeScreen({super.key});
 
   @override
@@ -55,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                       tasks: [
                         Task(
                           title: 'title 1',
-                          note: '',
+                          note: 'note',
                           time: '12:30',
                           date: 'May,09',
                           category: TaskCategories.home,
@@ -81,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                       tasks: [
                         Task(
                           title: 'title 1',
-                          note: 'note',
+                          note: '',
                           time: '12:30',
                           date: 'May,09',
                           category: TaskCategories.social,
@@ -89,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Task(
                           title: 'title 2,',
-                          note: 'note',
+                          note: '',
                           time: '12:30',
                           date: 'May,09',
                           category: TaskCategories.health,
@@ -100,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Gap(20),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => context.push(RouteLocation.createtask),
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: DisplayWhiteText(text: 'Add New Task'),
