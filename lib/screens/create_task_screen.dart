@@ -26,9 +26,11 @@ class CreateTaskScreen extends StatelessWidget {
               hintText: 'Task Title',
               controller: null,
             ),
-            Gap(10),
+            Gap(16),
+            SelectCategory(),
+            Gap(16),
             SelectDateTime(),
-            Gap(10),
+            Gap(16),
             CommonTextField(
               title: 'Note',
               hintText: 'Task note',
