@@ -15,34 +15,36 @@ class CreateTaskScreen extends StatelessWidget {
       appBar: AppBar(
         title: DisplayWhiteText(text: 'Add New Task'),
       ),
-      body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CommonTextField(
-              title: 'Task Title',
-              hintText: 'Task Title',
-              controller: null,
-            ),
-            Gap(16),
-            SelectCategory(),
-            Gap(16),
-            SelectDateTime(),
-            Gap(16),
-            CommonTextField(
-              title: 'Note',
-              hintText: 'Task note',
-              controller: null,
-              maxLines: 6,
-            ),
-            Gap(60),
-            ElevatedButton(
-              onPressed: () {},
-              child: DisplayWhiteText(text: 'Save'),
-            ),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              CommonTextField(
+                title: 'Task Title:',
+                hintText: 'Task Title',
+                controller: null,
+              ),
+              Gap(16),
+              SelectCategory(),
+              Gap(16),
+              SelectDateTime(),
+              Gap(16),
+              CommonTextField(
+                title: 'Note:',
+                hintText: 'Task note',
+                controller: null,
+                maxLines: 6,
+              ),
+              Gap(60),
+              ElevatedButton(
+                onPressed: () {},
+                child: DisplayWhiteText(text: 'Save'),
+              ),
+            ],
+          ),
         ),
       ),
     );
