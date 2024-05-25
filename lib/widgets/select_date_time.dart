@@ -54,7 +54,6 @@ class SelectDateTime extends ConsumerWidget {
 
     if (pickedTime != null) {
       ref.read(timeProvider.notifier).state = pickedTime;
-      //
     }
   }
 
