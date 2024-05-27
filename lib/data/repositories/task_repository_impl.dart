@@ -1,13 +1,11 @@
-import 'package:riverpod_to_do_app/data/data.dart';
-import 'package:riverpod_to_do_app/data/datasource/task_datasource.dart';
+import 'package:flutter_riverpod_todo_app/data/data.dart';
 
 class TaskRepositoryImpl implements TaskRepository {
   final TaskDatasource _datasource;
-
   TaskRepositoryImpl(this._datasource);
 
   @override
-  Future<void> createTask(Task task) async {
+  Future<void> addTask(Task task) async {
     try {
       await _datasource.addTask(task);
     } catch (e) {
@@ -25,7 +23,7 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<List<Task>> getAllTask() async {
+  Future<List<Task>> getAllTasks() async {
     try {
       return await _datasource.getAllTasks();
     } catch (e) {

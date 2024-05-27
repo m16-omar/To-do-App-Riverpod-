@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_to_do_app/data/data.dart';
-import 'package:riverpod_to_do_app/providers/task/task_provider.dart';
-import 'package:riverpod_to_do_app/utils/utils.dart';
-import 'package:riverpod_to_do_app/widgets/common_container.dart';
-import 'package:riverpod_to_do_app/widgets/task_details.dart';
-import 'package:riverpod_to_do_app/widgets/task_tile.dart';
+import 'package:flutter_riverpod_todo_app/data/data.dart';
+import 'package:flutter_riverpod_todo_app/providers/providers.dart';
+import 'package:flutter_riverpod_todo_app/utils/utils.dart';
+import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
 
 class DisplayListOfTasks extends ConsumerWidget {
   const DisplayListOfTasks({
     super.key,
-    required this.tasks,
     this.isCompletedTasks = false,
+    required this.tasks,
   });
-
-  final List<Task> tasks;
   final bool isCompletedTasks;
+  final List<Task> tasks;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final deviceSize = context.deviceSize;
     final height =
         isCompletedTasks ? deviceSize.height * 0.25 : deviceSize.height * 0.3;
-    final emptyTasksMessage = isCompletedTasks
-        ? 'There is no completed tasks yet'
-        : 'There is no task to do!';
+    final emptyTasksAlert = isCompletedTasks
+        ? 'There is no completed task yet'
+        : 'There is no task to todo!';
 
     return CommonContainer(
       height: height,
       child: tasks.isEmpty
           ? Center(
               child: Text(
-                emptyTasksMessage,
+                emptyTasksAlert,
                 style: context.textTheme.headlineSmall,
               ),
             )
@@ -42,21 +38,20 @@ class DisplayListOfTasks extends ConsumerWidget {
               padding: EdgeInsets.zero,
               itemBuilder: (ctx, index) {
                 final task = tasks[index];
+
                 return InkWell(
-                  onLongPress: () {
-                    AppAlerts.showDeleteAlertDialog(
-                      context,
-                      ref,
-                      task,
+                  onLongPress: () async {
+                    await AppAlerts.showAlertDeleteDialog(
+                      context: context,
+                      ref: ref,
+                      task: task,
                     );
                   },
                   onTap: () async {
                     await showModalBottomSheet(
                       context: context,
                       builder: (ctx) {
-                        return TaskDetails(
-                          task: task,
-                        );
+                        return TaskDetails(task: task);
                       },
                     );
                   },
@@ -64,10 +59,10 @@ class DisplayListOfTasks extends ConsumerWidget {
                     task: task,
                     onCompleted: (value) async {
                       await ref
-                          .read(taskProvider.notifier)
+                          .read(tasksProvider.notifier)
                           .updateTask(task)
                           .then((value) {
-                        AppAlerts.displaySnackBar(
+                        AppAlerts.displaySnackbar(
                           context,
                           task.isCompleted
                               ? 'Task incompleted'
@@ -78,11 +73,9 @@ class DisplayListOfTasks extends ConsumerWidget {
                   ),
                 );
               },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider(
-                  thickness: 1.5,
-                );
-              },
+              separatorBuilder: (context, index) => const Divider(
+                thickness: 1.5,
+              ),
             ),
     );
   }

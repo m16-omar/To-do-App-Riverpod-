@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
-import 'package:riverpod_to_do_app/data/models/task.dart';
+import 'package:flutter_riverpod_todo_app/data/data.dart';
 
 class TaskState extends Equatable {
   final List<Task> tasks;
 
-  const TaskState(this.tasks);
+  const TaskState({
+    required this.tasks,
+  });
   const TaskState.initial({
     this.tasks = const [],
   });
@@ -13,7 +15,7 @@ class TaskState extends Equatable {
     List<Task>? tasks,
   }) {
     return TaskState(
-      tasks ?? this.tasks,
+      tasks: tasks ?? this.tasks,
     );
   }
 

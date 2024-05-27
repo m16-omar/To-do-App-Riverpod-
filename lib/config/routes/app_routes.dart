@@ -1,19 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod_todo_app/config/config.dart';
+import 'package:flutter_riverpod_todo_app/screens/screens.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_to_do_app/config/routes/routes.dart';
-import 'package:riverpod_to_do_app/screens/screens.dart';
-
-final navigatorKey = GlobalKey<NavigatorState>();
 
 final appRoutes = [
   GoRoute(
     path: RouteLocation.home,
-    parentNavigatorKey: navigatorKey,
+    parentNavigatorKey: navigationKey,
     builder: HomeScreen.builder,
   ),
   GoRoute(
-    path: RouteLocation.createtask,
-    parentNavigatorKey: navigatorKey,
+    path: RouteLocation.createTask,
+    parentNavigatorKey: navigationKey,
     builder: CreateTaskScreen.builder,
   ),
 ];

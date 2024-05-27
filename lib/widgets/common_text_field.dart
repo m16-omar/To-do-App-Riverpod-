@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:gap/gap.dart';
-import 'package:riverpod_to_do_app/utils/utils.dart';
 
 class CommonTextField extends StatelessWidget {
   const CommonTextField({
     super.key,
-    required this.title,
+    this.controller,
     required this.hintText,
-    required this.controller,
+    required this.title,
     this.maxLines,
     this.suffixIcon,
     this.readOnly = false,
   });
-
-  final String title;
-  final String hintText;
   final TextEditingController? controller;
+  final String hintText;
+  final String title;
   final int? maxLines;
   final Widget? suffixIcon;
   final bool readOnly;
@@ -29,19 +28,19 @@ class CommonTextField extends StatelessWidget {
           title,
           style: context.textTheme.titleLarge,
         ),
-        Gap(10),
+        const Gap(10),
         TextField(
           readOnly: readOnly,
-          controller: controller,
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
-          maxLines: maxLines,
+          autocorrect: false,
+          controller: controller,
           decoration: InputDecoration(
             hintText: hintText,
             suffixIcon: suffixIcon,
           ),
-          onChanged: (value) {},
+          maxLines: maxLines,
         ),
       ],
     );

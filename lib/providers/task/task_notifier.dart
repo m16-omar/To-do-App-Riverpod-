@@ -1,17 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_to_do_app/data/data.dart';
-import 'package:riverpod_to_do_app/providers/task/task.dart';
+import 'package:flutter_riverpod_todo_app/data/data.dart';
+import 'package:flutter_riverpod_todo_app/providers/providers.dart';
 
 class TaskNotifier extends StateNotifier<TaskState> {
   final TaskRepository _repository;
+
   TaskNotifier(this._repository) : super(const TaskState.initial()) {
     getTasks();
   }
 
   Future<void> createTask(Task task) async {
     try {
-      await _repository.createTask(task);
+      await _repository.addTask(task);
       getTasks();
     } catch (e) {
       debugPrint(e.toString());
@@ -40,7 +41,7 @@ class TaskNotifier extends StateNotifier<TaskState> {
 
   void getTasks() async {
     try {
-      final tasks = await _repository.getAllTask();
+      final tasks = await _repository.getAllTasks();
       state = state.copyWith(tasks: tasks);
     } catch (e) {
       debugPrint(e.toString());

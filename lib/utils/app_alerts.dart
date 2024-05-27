@@ -1,55 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod_todo_app/data/data.dart';
+import 'package:flutter_riverpod_todo_app/providers/providers.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_to_do_app/data/models/task.dart';
-import 'package:riverpod_to_do_app/providers/task/task_provider.dart';
-import 'package:riverpod_to_do_app/utils/utils.dart';
 
+@immutable
 class AppAlerts {
-  AppAlerts._();
+  const AppAlerts._();
 
-  static displaySnackBar(BuildContext context, String message) {
+  static displaySnackbar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           message,
-          style: context.textTheme.bodyLarge
-              ?.copyWith(color: context.colorScheme.surface),
+          style: context.textTheme.bodyMedium,
         ),
-        backgroundColor: context.colorScheme.primary,
+        backgroundColor: context.colorScheme.onSecondary,
       ),
     );
   }
 
-  static Future<void> showDeleteAlertDialog(
-    BuildContext context,
-    WidgetRef ref,
-    Task task,
-  ) async {
+  static Future<void> showAlertDeleteDialog({
+    required BuildContext context,
+    required WidgetRef ref,
+    required Task task,
+  }) async {
     Widget cancelButton = TextButton(
+      child: const Text('NO'),
       onPressed: () => context.pop(),
-      child: Text('No'),
     );
     Widget deleteButton = TextButton(
       onPressed: () async {
-        await ref.read(taskProvider.notifier).deleteTask(task).then((value) {
-          AppAlerts.displaySnackBar(context, 'Task delete successfully');
-          context.pop();
-        });
+        await ref.read(tasksProvider.notifier).deleteTask(task).then(
+          (value) {
+            displaySnackbar(
+              context,
+              'Task deleted successfully',
+            );
+            context.pop();
+          },
+        );
       },
-      child: Text('Yes'),
+      child: const Text('YES'),
     );
+
     AlertDialog alert = AlertDialog(
-      title: Text('Are you sure you want to delete this task?'),
+      title: const Text('Are you sure you want to delete this task?'),
       actions: [
         deleteButton,
         cancelButton,
       ],
     );
+
     await showDialog(
-        context: context,
-        builder: (ctx) {
-          return alert;
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
